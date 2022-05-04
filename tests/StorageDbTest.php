@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
 use Yii;
 use yii\db\Connection;
-use yii2tech\config\StorageDb;
+use p4it\config\StorageDb;
 
 /**
  * Test case for the extension [[StorageDb]].

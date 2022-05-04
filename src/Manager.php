@@ -5,7 +5,7 @@
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
-namespace yii2tech\config;
+namespace p4it\config;
 
 use Yii;
 use yii\base\BootstrapInterface;
@@ -35,7 +35,7 @@ use yii\helpers\ArrayHelper;
  *     ],
  *     'components' => [
  *         'configManager' => [
- *             'class' => 'yii2tech\config\Manager',
+ *             'class' => 'p4it\config\Manager',
  *             'items' => [
  *                 'appName' => [
  *                     'path' => 'name',
@@ -149,7 +149,7 @@ class Manager extends Component implements BootstrapInterface
      * It should be [[Storage]] instance or its array configuration.
      */
     private $_storage = [
-        'class' => 'yii2tech\config\StorageDb'
+        'class' => 'p4it\config\StorageDb'
     ];
 
 

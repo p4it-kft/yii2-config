@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
 use Yii;
 use yii\validators\RequiredValidator;
-use yii2tech\config\Item;
+use p4it\config\Item;
 
 /**
  * Test case for the extension [[Item]].

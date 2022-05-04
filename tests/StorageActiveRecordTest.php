@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
 use Yii;
-use yii2tech\config\StorageActiveRecord;
-use yii2tech\tests\unit\config\data\ConfigActiveRecord;
+use p4it\config\StorageActiveRecord;
+use p4it\tests\unit\config\data\ConfigActiveRecord;
 
 class StorageActiveRecordTest extends TestCase
 {

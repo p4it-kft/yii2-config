@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
-use yii2tech\config\Storage;
-use yii2tech\config\StorageFilterTrait;
+use p4it\config\Storage;
+use p4it\config\StorageFilterTrait;
 
 class StorageFilterTraitTest extends TestCase
 {

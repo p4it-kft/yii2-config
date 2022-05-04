@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
 use Yii;
-use yii2tech\config\StoragePhp;
+use p4it\config\StoragePhp;
 
 /**
  * Test case for the extension [[StoragePhp]].

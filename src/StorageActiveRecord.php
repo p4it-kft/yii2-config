@@ -5,7 +5,7 @@
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
-namespace yii2tech\config;
+namespace p4it\config;
 
 /**
  * StorageActiveRecord is an configuration storage based on ActiveRecord.

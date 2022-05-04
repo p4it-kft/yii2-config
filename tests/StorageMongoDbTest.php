@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
 use yii\mongodb\Connection;
-use yii2tech\config\StorageMongoDb;
+use p4it\config\StorageMongoDb;
 
 /**
  * @group mongodb

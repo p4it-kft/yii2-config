@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2tech\tests\unit\config\data;
+namespace p4it\tests\unit\config\data;
 
 use yii\db\ActiveRecord;
 

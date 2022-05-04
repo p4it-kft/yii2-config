@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2tech\tests\unit\config;
+namespace p4it\tests\unit\config;
 
 use yii\helpers\ArrayHelper;
 use Yii;

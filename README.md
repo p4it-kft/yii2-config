@@ -1,46 +1,15 @@
-<p align="center">
-    <a href="https://github.com/yii2tech" target="_blank">
-        <img src="https://avatars2.githubusercontent.com/u/12951949" height="100px">
-    </a>
-    <h1 align="center">Application Runtime Configuration Extension for Yii 2</h1>
-    <br>
-</p>
-
 This extension provides support for application runtime configuration, loading config from database.
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
-[![Latest Stable Version](https://poser.pugx.org/yii2tech/config/v/stable.png)](https://packagist.org/packages/yii2tech/config)
-[![Total Downloads](https://poser.pugx.org/yii2tech/config/downloads.png)](https://packagist.org/packages/yii2tech/config)
-[![Build Status](https://travis-ci.org/yii2tech/config.svg?branch=master)](https://travis-ci.org/yii2tech/config)
-
-
-Installation
-------------
-
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
-
-Either run
-
-```
-php composer.phar require --prefer-dist yii2tech/config
-```
-
-or add
-
-```json
-"yii2tech/config": "*"
-```
-
-to the require section of your composer.json.
-
+It is a fork from yii2tech/config
 
 Usage
 -----
 
 This extension allows reconfigure already created Yii application instance using config composed from external storage
 like relational database, MongoDB and so on. It allows to reconfigure any application property, component or module.
-Configuration is performed by [[\yii2tech\config\Manager]] component, which should be added to the application configuration.
+Configuration is performed by [[\p4it\config\Manager]] component, which should be added to the application configuration.
 For example:
 
 ```php
@@ -51,7 +20,7 @@ For example:
     ],
     'components' => [
         'configManager' => [
-            'class' => 'yii2tech\config\Manager',
+            'class' => 'p4it\config\Manager',
             'items' => [
                 'appName' => [
                     'path' => 'name',
@@ -74,7 +43,7 @@ For example:
 ];
 ```
 
-[[\yii2tech\config\Manager]] implements [[\yii\base\BootstrapInterface]] interface, thus being placed under 'bootstrap'
+[[\p4it\config\Manager]] implements [[\yii\base\BootstrapInterface]] interface, thus being placed under 'bootstrap'
 section it will apply runtime configuration during application bootstrap. You can apply config manually to the application
 or any [[\yii\base\Module]] descendant, using following code:
 
@@ -86,14 +55,14 @@ $configManager->configure(Yii::$app);
 
 ## Configuration items specification <span id="configuration-items-specification"></span>
 
-Application parts, which should be reconfigured are determined by [[\yii2tech\config\Manager::$items]], which is a list
-of [[\yii2tech\config\Item]]. Each configuration item determines the configuration path - a list of keys in application
+Application parts, which should be reconfigured are determined by [[\p4it\config\Manager::$items]], which is a list
+of [[\p4it\config\Item]]. Each configuration item determines the configuration path - a list of keys in application
 configuration array, which leads to the target value. For example: path 'components.formatter.nullDisplay' (or
 `['components', 'formatter', 'nullDisplay']`) points to the property 'nullDisplay' of [[\yii\i18n\Formatter]] component,
 path 'name' points to [[\yii\base\Application::name]] and so on.
 
 > Note: if no path is specified it will be considered as a key inside [[\yii\base\Module::$params]] array, which matches
-  configuration item id (name of key in [[\yii2tech\config\Manager::$items]] array).
+  configuration item id (name of key in [[\p4it\config\Manager::$items]] array).
 
 Configuration item may also have several properties, which supports creation of web interface for configuration setup.
 These are:
@@ -151,13 +120,13 @@ Here are some examples of item specifications:
 ## Configuration storage <span id="configuration-storage"></span>
 
 Declared configuration items may be saved into persistent storage and then retrieved from it.
-The actual item storage is determined via [[\yii2tech\config\Manager::storage]].
+The actual item storage is determined via [[\p4it\config\Manager::storage]].
 
 Following storages are available:
- - [[\yii2tech\config\StoragePhp]] - stores configuration inside PHP files
- - [[\yii2tech\config\StorageDb]] - stores configuration inside relational database
- - [[\yii2tech\config\StorageMongoDb]] - stores configuration inside MongoDB
- - [[\yii2tech\config\StorageActiveRecord]] - finds configuration using ActiveRecord
+ - [[\p4it\config\StoragePhp]] - stores configuration inside PHP files
+ - [[\p4it\config\StorageDb]] - stores configuration inside relational database
+ - [[\p4it\config\StorageMongoDb]] - stores configuration inside MongoDB
+ - [[\p4it\config\StorageActiveRecord]] - finds configuration using ActiveRecord
 
 Please refer to the particular storage class for more details.
 
@@ -166,7 +135,7 @@ Please refer to the particular storage class for more details.
 
 The most common use case for this extension is creating a web interface, which allows control of application
 configuration in runtime.
-[[\yii2tech\config\Manager]] serves not only for applying of the configuration - it also helps to create an
+[[\p4it\config\Manager]] serves not only for applying of the configuration - it also helps to create an
 interface for configuration editing.
 
 The web controller for configuration management may look like following:
@@ -183,7 +152,7 @@ class ConfigController extends Controller
      */
     public function actionIndex()
     {
-        /* @var $configManager \yii2tech\config\Manager */
+        /* @var $configManager \p4it\config\Manager */
         $configManager = Yii::$app->get('configManager');
 
         $models = $configManager->getItems();
@@ -204,7 +173,7 @@ class ConfigController extends Controller
      */
     public function actionDefault()
     {
-        /* @var $configManager \yii2tech\config\Manager */
+        /* @var $configManager \p4it\config\Manager */
         $configManager = Yii::$app->get('configManager');
         $configManager->clearValues();
         Yii::$app->session->setFlash('success', 'Default values restored.');
@@ -221,7 +190,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $models yii2tech\config\Item[] */
+/* @var $models p4it\config\Item[] */
 ?>
 <?php $form = ActiveForm::begin(); ?>
 
@@ -256,7 +225,7 @@ use yii\widgets\ActiveForm;
 
 ## Standalone configuration <span id="standalone-configuration"></span>
 
-[[\yii2tech\config\Manager]] can be used not only for application configuration storage: it may hold any abstract
+[[\p4it\config\Manager]] can be used not only for application configuration storage: it may hold any abstract
 configuration set for any standalone task. You can configure manager as an application component, which stores some
 user settings as use it to retrieve it. For example:
 
@@ -265,9 +234,9 @@ user settings as use it to retrieve it. For example:
     'components' => [
         // no application boostap!
         'userInterfaceConfig' => [
-            'class' => 'yii2tech\config\Manager',
+            'class' => 'p4it\config\Manager',
             'storage' => [
-                'class' => 'yii2tech\config\StorageDb',
+                'class' => 'p4it\config\StorageDb',
                 'autoRestoreValues' => true, // restore config values from storage at component initialization
                 'filter' => function () {
                     return [
@@ -305,16 +274,16 @@ if (Yii::$app->userInterfaceConfig->getItemValue('sidebarEnabled')) {
 echo Yii::$app->userInterfaceConfig->getItemValue('backgroundColor');
 ```
 
-Note that you should enable [[\yii2tech\config\Manager::$autoRestoreValues]] to make configuration values to be
-restored from persistent storage automatically, otherwise you'll have to invoke [[\yii2tech\config\Manager::restoreValues()]]
+Note that you should enable [[\p4it\config\Manager::$autoRestoreValues]] to make configuration values to be
+restored from persistent storage automatically, otherwise you'll have to invoke [[\p4it\config\Manager::restoreValues()]]
 method manually. Also do not forget to specify default value for each configuration item, otherwise it will be picked up
 from current application.
 
-You may also use [[\yii2tech\config\Manager]] to configure particular component. For example:
+You may also use [[\p4it\config\Manager]] to configure particular component. For example:
 
 ```php
 use yii\base\Component;
-use yii2tech\config\Manager;
+use p4it\config\Manager;
 
 class SomeComponent extends Component
 {
@@ -332,7 +301,7 @@ class SomeComponent extends Component
             $this->_configManager = new Manager([
                 'source' => $this,
                 'storage' => [
-                    'class' => 'yii2tech\config\StorageDb',
+                    'class' => 'p4it\config\StorageDb',
                     'table' => 'SomeComponentConfig',
                 ],
                 'items' => [

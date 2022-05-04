@@ -1,5 +1,5 @@
 {
-    "name": "yii2tech/config",
+    "name": "p4it-kft/config",
     "description": "Provides support for Yii2 application runtime configuration",
     "keywords": ["yii2", "config", "configuration", "runtime", "database"],
     "type": "yii2-extension",
@@ -14,6 +14,10 @@
         {
             "name": "Paul Klimov",
             "email": "klimov.paul@gmail.com"
+        },
+        {
+            "name": "Péter Papp",
+            "email": "papp.peter@p4it.hu"
         }
     ],
     "require": {
@@ -26,7 +30,7 @@
         }
     ],
     "autoload": {
-        "psr-4": {"yii2tech\\config\\": "src"}
+        "psr-4": {"p4it\\config\\": "src"}
     },
     "extra": {
         "branch-alias": {
