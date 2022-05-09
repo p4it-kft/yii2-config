@@ -197,7 +197,7 @@ class Manager extends Component implements BootstrapInterface
     public function getStorage()
     {
         if (!is_object($this->_storage)) {
-            $this->_storage = Instance::ensure($this->_storage, Storage::className());
+            $this->_storage = Instance::ensure($this->_storage, Storage::class);
         }
         return $this->_storage;
     }
@@ -208,6 +208,16 @@ class Manager extends Component implements BootstrapInterface
     public function setItems($items)
     {
         $this->_items = $items;
+    }
+
+    /**
+     * @param array $items items list or configuration file name.
+     */
+    public function addItems(array $items)
+    {
+        $this->_items = ArrayHelper::merge($this->_items, $items);
+        
+        return $this;
     }
 
     /**
@@ -249,7 +259,7 @@ class Manager extends Component implements BootstrapInterface
     protected function createItem($id, array $config)
     {
         if (empty($config['class'])) {
-            $config['class'] = Item::className();
+            $config['class'] = Item::class;
         }
         $config['id'] = $id;
         $config['source'] = $this->source;

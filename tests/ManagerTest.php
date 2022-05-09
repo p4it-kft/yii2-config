@@ -42,7 +42,7 @@ class ManagerTest extends TestCase
     {
         return new Manager([
             'storage' => [
-                'class' => StoragePhp::className(),
+                'class' => StoragePhp::class,
                 'fileName' => $this->getTestFilePath() . DIRECTORY_SEPARATOR . 'config.php',
             ],
         ]);
@@ -404,7 +404,7 @@ class ManagerTest extends TestCase
         $manager = new Manager([
             'autoRestoreValues' => true,
             'storage' => [
-                'class' => StoragePhp::className(),
+                'class' => StoragePhp::class,
                 'fileName' => $fileName,
             ],
             'items' => [
