@@ -12,6 +12,7 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\di\ServiceLocator;
+use yii\helpers\Inflector;
 use yii\validators\Validator;
 
 /**
@@ -29,6 +30,22 @@ use yii\validators\Validator;
  */
 class Item extends Model
 {
+    /**
+     * @return string customise form name to work with ActiveForm correctly.
+     * @since 3.0.0
+     */
+    public function formName()
+    {
+        return Inflector::camelize($this->id);
+    }
+
+    /**
+     * Used to identify default values so no unnecessary NULLs will be passed to the config
+     *
+     * @var string
+     */
+    protected const DEFAULT_VALUE = '#$[//CC';
+
     /**
      * @var mixed config parameter unique identifier.
      */
@@ -63,6 +80,11 @@ class Item extends Model
      */
     public $inputOptions = [];
     /**
+     * @var array options, which can be used to composed configuration layout.
+     * @since 3.0.0
+     */
+    public $layoutOptions = [];
+    /**
      * @var object|null configuration source object.
      * If not set current Yii application instance will be used.
      * @since 1.0.4
@@ -72,7 +94,7 @@ class Item extends Model
     /**
      * @var mixed config parameter value.
      */
-    private $_value;
+    private $_value = self::DEFAULT_VALUE;
     /**
      * @var string label for the [[value]] attribute.
      */
@@ -92,7 +114,7 @@ class Item extends Model
      */
     public function getValue()
     {
-        if ($this->_value === null) {
+        if ($this->_value === self::DEFAULT_VALUE) {
             $this->_value = $this->extractCurrentValue();
         }
         return $this->_value;
