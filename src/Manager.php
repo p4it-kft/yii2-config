@@ -125,6 +125,11 @@ class Manager extends Component implements BootstrapInterface
      * @since 1.0.6
      */
     public $ignoreConfigureError = false;
+    /**
+     * @var bool whether to shutdown any exception throwing on attempt load config value which does not exists any more
+     * @since 3.0.0
+     */
+    public $ignoreUnusedItemValueError = false;
 
     /**
      * @var array[]|Item[]|string|callable config items in format: id => configuration.
@@ -297,9 +302,13 @@ class Manager extends Component implements BootstrapInterface
      * @param array $itemValues config item values.
      * @return Manager self reference.
      */
-    public function setItemValues(array $itemValues)
+    protected function setItemValues(array $itemValues)
     {
         foreach ($itemValues as $id => $value) {
+            if ($this->ignoreUnusedItemValueError && !array_key_exists($id, $this->_items)) {
+                continue;
+            }
+            
             $item = $this->getItem($id);
             $item->value = $value;
         }
