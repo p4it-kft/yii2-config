@@ -10,6 +10,7 @@ namespace p4it\config;
 use yii\db\Connection;
 use yii\db\Query;
 use yii\di\Instance;
+use yii\helpers\Json;
 
 /**
  * StorageDb represents the configuration storage based on database table.
@@ -19,7 +20,7 @@ use yii\di\Instance;
  * $tableName = 'AppConfig';
  * $columns = [
  *     'id' => 'string',
- *     'value' => 'text',
+ *     'value' => 'json',
  *     'PRIMARY KEY(id)',
  * ];
  * $this->createTable($tableName, $columns);
@@ -43,17 +44,22 @@ class StorageDb extends Storage
     /**
      * @var string name of the table, which should store values.
      */
-    public $table = 'AppConfig';
+    public string $table = 'AppConfig';
     /**
      * @var string name of the column, which should store config item ID.
      * @since 1.0.7
      */
-    public $idColumn = 'id';
+    public string $idColumn = 'id';
     /**
      * @var string name of the column, which should store config item value.
      * @since 1.0.7
      */
-    public $valueColumn = 'value';
+    public string $valueColumn = 'value';
+    /**
+     * @var bool add possibility to use json.
+     * @since 3.0.0
+     */
+    public bool $useJsonValueColumn = false;
 
 
     /**
@@ -100,7 +106,11 @@ class StorageDb extends Storage
 
         $values = [];
         foreach ($rows as $row) {
-            $values[$row[$this->idColumn]] = $row[$this->valueColumn];
+            if($this->useJsonValueColumn === true) {
+                $values[$row[$this->idColumn]] = Json::decode($row[$this->valueColumn]);    
+            } else {
+                $values[$row[$this->idColumn]] = $row[$this->valueColumn];
+            }
         }
 
         return $values;
